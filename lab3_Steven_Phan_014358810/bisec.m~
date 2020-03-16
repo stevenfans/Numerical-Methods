@@ -1,0 +1,46 @@
+function [root,err,x] = bisec(f,a,b,tol,maxIter)
+ 
+    isRoot = 0;
+    prev = 0; 
+    x = 0;
+    X = sym('x');
+    
+    for i=1:1:maxIter
+        % get midpoint between a and b
+        mid = (a+b)/2;
+        
+        a = vpa(subs(f,X,a))
+        b = vpa(subs(f,X,b))
+        
+        % check to determine new a and b
+        if (a*mid<0)
+            b = mid;
+        elseif (a*mid>0)
+            a = mid;
+        elseif (a*mid==0)
+            isRoot = 1; 
+        end
+        
+        root = mid; 
+        
+        % condition for when there is a previous value
+        if prev~=0
+        % vector or relative approx errors
+            Ea = abs(mid - prev )/mid;       
+            err = Ea;
+        % vector of approx value of root
+        end
+        
+        % check if the mid is less than the tolerance to be the root
+        if(mid<tol)
+            isRoot = 1; 
+        end
+        
+        if isRoot==1
+             break; 
+        end
+         
+         prev = mid; 
+    end
+
+end
