@@ -1,0 +1,26 @@
+function val = simpsonIntergral(f,a,b,N)
+    
+    X = sym('x'); 
+    
+    h = (b-a)/N;
+    dX = (b-a)/(3*N); 
+    
+    fx0 = vpa(subs(f,X,a)); 
+    fx1 = vpa(subs(f,X,b)); 
+    
+    xs = zeros(1,1); 
+    xs(1) = a; 
+    
+    for k = 2:N
+        xs(k) = xs(k-1) + h;
+    end
+    
+    xs = vpa(subs(f,X,xs));
+    
+    oddInd = xs(1:2:end);
+    evenInd = xs(2:2:end); 
+    
+    sumEven = sum(2.*evenInd, 'all');
+    sumOdd  = sum(4.*oddInd,'all');
+    
+    val = dX + sumEven + sumOdd + fx
