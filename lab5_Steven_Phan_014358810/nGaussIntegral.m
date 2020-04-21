@@ -18,7 +18,7 @@ function val = nGaussIntegral(f,a,b,N)
     
     p1 = (b-a)/2; 
     p2 = (b+a)/2; 
-    pIn = (p1 * x + p2) * p1;
+    pIn = (p1 * x + p2);
     
     if N == 2
         n = x2;
@@ -36,7 +36,7 @@ function val = nGaussIntegral(f,a,b,N)
     
     result = vpa(subs(pIn,X,n));
     result = c.*vpa(subs(f,X,result));
-    val = sum(result);
+    val = p1*sum(result);
     
     
     
