@@ -12,7 +12,7 @@ function val = tranpezoidalIntegral(f,a,b,N)
     ss = zeros(1,N-1); 
     
     for k = 1:N-1
-        ss(k) = a+ (k*h)
+        ss(k) = a+ (k*h);
     end
     
     fs = vpa(subs(f,X,ss));
